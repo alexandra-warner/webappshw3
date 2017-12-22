@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rate Movies</title>
+        <link rel="stylesheet" href="/styles/styles-advanced.css" /> 
+        <!-- Uncomment below when using styles-advanced.css -->
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+            <script type="text/javascript">
+                //$(document).ready(function () {
+                    //$('#rating-submit').click(function () {
+                        //var payload = {
+                            //rating_submit: $('#rating_submit').val()
+                        //};
+                        //$.ajax({
+                            //url: "/movie",
+                            //type: "POST",
+                            //contentType: "application/json",
+                            //processData: false,
+                            //data: JSON.stringify(payload),
+                            //complete: function (data) {
+                                //$('#output').html(data.responseText);
+                            //}
+                        //});
+                    //});
+                //});
+                //$(document).ready(function(){
+                    //$(#submit).click(function(){
+                        //const movieId = $(#movieid_submit).val()
+                        //const rating = $(rating_submit).val()
+                        //$.post("/movie",{
+                            //movieId = movieId,
+                            //rating = rating
+                        //});
+                    //});
+                //});
+                $(document).ready(function(){
+                    $('#submit').click(function(){
+                        $.ajax({
+                            url: '/movie'
+                            method: POST
+                            data: {
+                                movieId: req.body.movieid_Submit,
+                                timestamp: moment().format('X'),
+                                rating: req.body.rating_submit,
+                            }
+                        })
+                        .done(function(results){
+                            cosole.log(results);
+                            const movieId = results.data.movieId
+                            const timestamp = results.data.timestamp
+                            const rating = results.data.rating
+                            const q = `INSERT INTO movies.ratings VALUES (?, ?, ?, ?)`
+                            db.query(q,[1000, movieId, rating, timestamp], function (err, results){
+                                if (err) {
+                                    console.error(err);
+                                    return res.status(500).send('Failed. Oops.');
+                                } else{
+                                    console.log("Rating successfully submitted!");
+                                }
+                            })
+                        });
+                    });
+                });
+
+
+            </script>
+    </head>
+    <body>
+        <header>
+            <h1>Rate Movies</h1>
+        </header>
+        <main>
+            {{#each article}}
+            <article>
+                <ul>
+                    <form method="POST" action="/movie">
+                        <div>
+                            <h3><label for="title">{{title}} (Movie ID: {{movieId}}</label></h3>
+                        </div>
+                        <div>
+                            <li><label for="genre">Genres: {{genres}}</label></li>
+                        </div>
+                        <div>
+                            <li><label for="avgrating">Average Rating: {{avgrating}}</label></li>
+                        </div>
+                        <div class="input-wrap">
+                            <label for="movieid_submit">What is the MovieID you want to rate?</label>
+                            <input id="movieid_submit" name="movieid_submit">
+                            <br>
+                            <label for="rating_submit">What do you rate this movie?</label>
+                            <input id="rating_submit" type="number" name="rating_submit" step="1" min="0" max="5">
+                        </div>
+                        <button id="submit" type="submit">Add Rating</button>
+                    </form>
+                </ul>
+            </article>
+            {{/each}}
+        </main>
+    </body>
+</html>

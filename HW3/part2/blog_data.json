@@ -1,0 +1,28 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "date": "2017/09/05",
+            "title": "Trendy Instagrammable Food",
+            "summary": "Each week I like to think of some delicious snacks to make to bring to work that also help that 3 PM slump.",
+            "fulltext": "Each week I like to think of some delicious snacks to make to bring to work that also help that 3 PM slump.",
+            "image": "/img/posts/food1.jpg"
+        },
+        {
+            "id": 2,
+            "date": "2017/09/03",
+            "title": "Sunday Pancakes",
+            "summary": "While I totally meant to post this last week, the time seemed to get away from me after an adventurous...",
+            "fulltext": "While I totally meant to post this last week, the time seemed to get away from me after an adventurous...",
+            "image": "/img/posts/food2.jpg"
+        },
+        {
+            "id": 3,
+            "date": "2017/08/30",
+            "title": "Roasted Brussels Sprouts",
+            "summary": "Summer times means bringing out the grill, and brussels sprouts are the perfect healthy item to...",
+            "fulltext": "Summer times means bringing out the grill, and brussels sprouts are the perfect healthy item to...",
+            "image": "img/posts/food3.jpg"
+        }
+    ]
+}
